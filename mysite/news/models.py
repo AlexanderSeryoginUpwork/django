@@ -5,11 +5,8 @@ from django.db import models
 
 class News(models.Model):
     title = models.CharField(max_length=255)
-    # black=True т.е. необязательное поле
-    content = models.TextField(blank=True)
-    # auto_now_add только один раз в момент создания
-    created_at = models.DateTimeField(auto_now_add=True)
-    # auto_now обновляет при каждом сохранении
-    updated_at = models.DateTimeField(auto_now=True)
-    photo = models.ImageField(upload_to='photos/%y/%m/%d')
+    content = models.TextField(blank=True)  # black=True т.е. необязательное поле
+    created_at = models.DateTimeField(auto_now_add=True)  # auto_now_add только один раз в момент создания
+    updated_at = models.DateTimeField(auto_now=True)  # auto_now обновляет при каждом сохранении
+    photo = models.ImageField(upload_to='photos/%y/%m/%d')  # python -m pip install Pillow
     is_published = models.BooleanField(default=True)
