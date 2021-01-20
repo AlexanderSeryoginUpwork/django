@@ -10,3 +10,7 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # auto_now обновляет при каждом сохранении
     photo = models.ImageField(upload_to='photos/%y/%m/%d')  # python -m pip install Pillow
     is_published = models.BooleanField(default=True)
+
+
+def __str__(self):
+    return self.title
