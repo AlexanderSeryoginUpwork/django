@@ -10,6 +10,8 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')  # auto_now обновляет при каждом сохранении
     photo = models.ImageField(upload_to='photos/%y/%m/%d', verbose_name='Фото', blank=True)  # python -m pip install Pillow
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано?')
+    #  category доступна как внешний ключ
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, default=1, verbose_name='Категория')  #  models.PROTECT защищает связанные данные от удаления
 
     '''
     В админке при редактировании или создании нового поста, изображение является обязетельным.
@@ -17,11 +19,32 @@ class News(models.Model):
     python manage.py makemigrations && python manage.py migrate
     '''
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
         ordering = ['-created_at']
 
 
-def __str__(self):
-    return self.title
+class Category(models.Model):
+    title = models.CharField(max_length=140, db_index=True, verbose_name='Наименование категории')
+
+    '''
+        без приведения к строке список категорий будет примерно таким:
+        <Category Object(1)>
+        <Category Object(2)>
+        <Category Object(3)>
+        <Category Object(4)>
+    '''
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
+        ordering = ['title']
+
+
+
