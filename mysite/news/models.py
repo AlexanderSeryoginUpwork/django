@@ -38,8 +38,8 @@ class Category(models.Model):
         <Category Object(3)>
         <Category Object(4)>
     '''
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
 
     class Meta:
         verbose_name = 'категория'
