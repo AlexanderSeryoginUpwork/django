@@ -21,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Главная</a>
                 </li>
                 <li class="nav-item">
-                     <a class="nav-link active" aria-current="page" href="/">Добавить новость</a>
+                     <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Добавить новость</a>
                 </li>
             </ul>
         </div>
@@ -37,7 +37,7 @@
         <div class="col-md-4">
             <ul class="list-group">
                 {% for item in categories %}
-                <a href="/category/{{ item.pk }}">
+                <a href="{% url 'category' item.pk %}">
                      <li class="list-group-item list-group-item-action">{{ item.title }}</li>
                 </a>
                 {% endfor %}

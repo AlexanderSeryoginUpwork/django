@@ -22,8 +22,7 @@ from news.views import get_category
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('news/', include('news.urls')),
-    path('category/<int:category_id>', get_category)
+    path('', include('news.urls'))
 ]
 
 #  будет применено только на боевом сервере
