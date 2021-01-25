@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 from .models import News, Category
 
@@ -17,4 +17,12 @@ def index(request):
 def get_category(request, category_id):
     news = News.objects.filter(category_id=category_id)
     categories = Category.objects.all()
-    return render(request, 'news/category.html', {'news': news, 'categories': categories })
+    return render(request, 'news/category.html', {'news': news, 'categories': categories})
+
+
+def view_item2(request, news_id):
+    news_item = get_object_or_404(News, pk=news_id)
+    context = {
+        'news_item': news_item
+    }
+    return render(request, template_name='news/view_news.html', context=context)
