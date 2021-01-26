@@ -34,7 +34,8 @@ def add_news(request):
         form = NewsForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data) # {'title': 'Новость из формы', 'content': 'Новость из формы 123', 'is_published': True, 'category': <Category: Наука>}
-            news = News.objects.create(**form.cleaned_data)
+            # news = News.objects.create(**form.cleaned_data)
+            news = form.save()
             return redirect(news)
         else:
             print('ololo')
