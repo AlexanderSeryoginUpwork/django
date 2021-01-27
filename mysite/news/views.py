@@ -7,15 +7,22 @@ from django.views.generic import ListView
 
 
 class HomeNews(ListView):
+    # c какой моделью работать, откуда брать данные
     model = News
+
+    # какой шаблон будет использоваться вместо шаблона по-умолчанию
     template_name = 'news/home_news_list.html'
+
+    # по какой переменной итерировать вместо object_list
     context_object_name = 'news'
 
+    # дополнительные параметры страницы. Например, title
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Главная страница'
         return context
 
+    # отфильтрованные данные из БД
     def get_queryset(self):
         return News.objects.filter(is_published=True)
 
