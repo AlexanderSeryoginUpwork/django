@@ -27,10 +27,21 @@ class HomeNews(ListView):
         return News.objects.filter(is_published=True)
 
 
-def get_category(request, category_id):
-    news = News.objects.filter(category_id=category_id)
-    categories = Category.objects.all()
-    return render(request, 'news/category.html', {'news': news, 'categories': categories})
+# def get_category(request, category_id):
+#     news = News.objects.filter(category_id=category_id)
+#     categories = Category.objects.all()
+#     return render(request, 'news/category.html', {'news': news, 'categories': categories})
+
+class NewsByCategory(ListView):
+    model = News
+    template_name = 'news/home_news_list.html'
+    context_object_name = 'news'
+
+    # при отсутствии категории показываем 404
+    allow_empty = False
+
+    def get_queryset(self):
+        return News.objects.filter(category_id=self.kwargs['category_id'], is_published=True)
 
 
 def view_item2(request, news_id):
