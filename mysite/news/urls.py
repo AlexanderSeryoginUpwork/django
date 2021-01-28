@@ -12,5 +12,6 @@ urlpatterns = [
     # path('news/<int:news_id>', view_item2, name='view_item3'),
     path('news/<int:pk>', ViewNews.as_view(), name='view_item3'),
 
-    path('news/add', add_news, name='add_news'),
+    # path('news/add', add_news, name='add_news'),
+    path('news/add', CreateNews.as_view(), name='add_news'),
 ]
